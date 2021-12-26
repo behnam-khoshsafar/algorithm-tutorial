@@ -1,8 +1,10 @@
-package search;
+package search.impl;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import search.Search;
+import search.impl.BinarySearch;
 
 import java.util.Optional;
 

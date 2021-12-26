@@ -1,4 +1,6 @@
-package search;
+package search.impl;
+
+import search.Search;
 
 import java.util.Optional;
 
