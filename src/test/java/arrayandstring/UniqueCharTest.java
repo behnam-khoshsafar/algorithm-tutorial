@@ -28,8 +28,26 @@ class UniqueCharTest {
                 "ewirioewuroiewuroewjdshfkjdsfdsgfyuteyrtewrgyrewytreyuwtrewrewurtuyt");
     }
 
+    @Test
+    public void isUniqueUsingSet() {
+        assertIsUniqueUsingSet(true, null);
+        assertIsUniqueUsingSet(true, " ");
+        assertIsUniqueUsingSet(true, "Test");
+        assertIsUniqueUsingSet(false, "Test Test");
+        assertIsUniqueUsingSet(false, "Test T");
+        assertIsUniqueUsingSet(true, "23432432432483749732432974932749327493247932" +
+                "47329473294uhdkfhdksadsadgyuwewrtyuewrtuweytruewyrtuyewtruyewrt" +
+                "rewuyrewyriuewyriewyuriewuyriewryieyreiyrieryeiwryieryeiryieryey" +
+                "rewirioewuroiewuruewroueworuoewureowuroeiuroewuroewuroewuroewuroie" +
+                "ewirioewuroiewuroewjdshfkjdsfdsgfyuteyrtewrgyrewytreyuwtrewrewurtuyt");
+    }
+
     private void assertIsUnique(boolean result, String str) {
         assertEquals(result, uniqueChar.isUnique(str));
+    }
+
+    private void assertIsUniqueUsingSet(boolean result, String str) {
+        assertEquals(result, uniqueChar.isUniqueUsingSet(str));
     }
 
 }
