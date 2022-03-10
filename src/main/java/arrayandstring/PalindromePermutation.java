@@ -13,7 +13,7 @@ public class PalindromePermutation {
         Map<Character, Integer> frequencyMap = new HashMap<>();
         var oddCounter = 0;
         for (Character ch : chars) {
-            int value = (frequencyMap.getOrDefault(ch, 1)) + 1;
+            int value = (frequencyMap.getOrDefault(ch, 0)) + 1;
             if (value % 2 == 0)
                 oddCounter--;
             else
