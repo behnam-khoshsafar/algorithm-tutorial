@@ -5,10 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static linkedlist.LinkedList.KthToLast;
-import static linkedlist.LinkedList.removeDuplicate;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static linkedlist.LinkedList.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LinkedListTest {
 
@@ -74,5 +72,42 @@ class LinkedListTest {
         LinkedListNode<Integer> listNode4 = new LinkedListNode<>(4, null);
         LinkedListNode<Integer> listNode2 = new LinkedListNode<>(2, listNode4);
         assertEquals(4, KthToLast(listNode2, 1));
+    }
+
+    @Test
+    public void deleteNodeShouldDeleteCorrectValue() {
+        LinkedListNode<Integer> listNode9 = new LinkedListNode<>(9, null);
+        LinkedListNode<Integer> listNode8 = new LinkedListNode<>(8, listNode9);
+        LinkedListNode<Integer> listNode7 = new LinkedListNode<>(7, listNode8);
+        LinkedListNode<Integer> listNode4 = new LinkedListNode<>(4, listNode7);
+        LinkedListNode<Integer> listNode2 = new LinkedListNode<>(2, listNode4);
+
+        assertTrue(deleteNode(listNode4));
+        assertEquals(listNode4.getNext(), listNode8);
+        assertEquals(listNode7.getData(),listNode4.getData());
+    }
+
+    @Test
+    public void deleteNodeShouldDeleteFirstItem() {
+        LinkedListNode<Integer> listNode9 = new LinkedListNode<>(9, null);
+        LinkedListNode<Integer> listNode8 = new LinkedListNode<>(8, listNode9);
+        LinkedListNode<Integer> listNode7 = new LinkedListNode<>(7, listNode8);
+        LinkedListNode<Integer> listNode4 = new LinkedListNode<>(4, listNode7);
+        LinkedListNode<Integer> listNode2 = new LinkedListNode<>(2, listNode4);
+
+        assertTrue(deleteNode(listNode2));
+        assertEquals(listNode2.getNext(), listNode4.getNext());
+        assertEquals(listNode2.getData(),listNode4.getData());
+    }
+
+    @Test
+    public void deleteNodeShouldDeleteLastItem() {
+        LinkedListNode<Integer> listNode9 = new LinkedListNode<>(9, null);
+        LinkedListNode<Integer> listNode8 = new LinkedListNode<>(8, listNode9);
+        LinkedListNode<Integer> listNode7 = new LinkedListNode<>(7, listNode8);
+        LinkedListNode<Integer> listNode4 = new LinkedListNode<>(4, listNode7);
+        LinkedListNode<Integer> listNode2 = new LinkedListNode<>(2, listNode4);
+
+        assertFalse(deleteNode(listNode9));
     }
 }

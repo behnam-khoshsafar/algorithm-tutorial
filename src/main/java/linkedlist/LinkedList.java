@@ -39,4 +39,13 @@ public class LinkedList {
 
         return p2.getData();
     }
+
+    public static <E> boolean deleteNode(LinkedListNode<E> node) {
+        if (node == null || node.getNext() == null)
+            return false;
+        LinkedListNode<E> next = node.getNext();
+        node.setNext(next.getNext());
+        node.setData(next.getData());
+        return true;
+    }
 }

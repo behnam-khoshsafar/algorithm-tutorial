@@ -13,6 +13,10 @@ public class LinkedListNode<E> {
         this.next = node;
     }
 
+    public void setData(E data) {
+        this.data = data;
+    }
+
     public E getData() {
         return data;
     }
