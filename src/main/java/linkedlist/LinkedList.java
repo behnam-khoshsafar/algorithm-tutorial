@@ -19,4 +19,24 @@ public class LinkedList {
             tempSet.add(next);
         }
     }
+
+    public static <E> E KthToLast(LinkedListNode<E> linkedListNode, int k) {
+        if (linkedListNode == null)
+            return null;
+
+        LinkedListNode<E> p1 = linkedListNode;
+        LinkedListNode<E> p2 = linkedListNode;
+
+        for (int i = 0; i < k; i++) {
+            if (p1 == null) return null;
+            p1 = p1.getNext();
+        }
+
+        while (p1 != null) {
+            p1 = p1.getNext();
+            p2 = p2.getNext();
+        }
+
+        return p2.getData();
+    }
 }

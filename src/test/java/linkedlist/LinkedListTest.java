@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static linkedlist.LinkedList.KthToLast;
 import static linkedlist.LinkedList.removeDuplicate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -12,14 +13,14 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 class LinkedListTest {
 
     @Test
-    public void shouldHandleNullValue() {
+    public void removeDuplicateShouldHandleNullValue() {
         List<Integer> list = null;
         removeDuplicate(list);
         assertNull(list);
     }
 
     @Test
-    public void shouldHandleEmptyValue() {
+    public void removeDuplicateShouldHandleEmptyValue() {
         List<Integer> list = new ArrayList<>();
         removeDuplicate(list);
         assertEquals(0, list.size());
@@ -42,5 +43,36 @@ class LinkedListTest {
         removeDuplicate(list);
 
         assertEquals(List.of(1, 2, 3, 6, 7, 9, 10, 11, 12), list);
+    }
+
+    @Test
+    public void KthToLastShouldReturnEmptyForNullInput() {
+        assertNull(KthToLast(null, 1));
+    }
+
+    @Test
+    public void KthToLastShouldReturnEmptyForInvalidKth() {
+        LinkedListNode<Integer> listNode = new LinkedListNode<>(2, null);
+        assertNull(KthToLast(listNode, 5));
+    }
+
+    @Test
+    public void KthToLastShouldReturnCorrectResult1() {
+        LinkedListNode<Integer> listNode = new LinkedListNode<>(2, null);
+        assertEquals(2, KthToLast(listNode, 1));
+    }
+
+    @Test
+    public void KthToLastShouldReturnCorrectResult2() {
+        LinkedListNode<Integer> listNode4 = new LinkedListNode<>(4, null);
+        LinkedListNode<Integer> listNode2 = new LinkedListNode<>(2, listNode4);
+        assertEquals(2, KthToLast(listNode2, 2));
+    }
+
+    @Test
+    public void KthToLastShouldReturnCorrectResult3() {
+        LinkedListNode<Integer> listNode4 = new LinkedListNode<>(4, null);
+        LinkedListNode<Integer> listNode2 = new LinkedListNode<>(2, listNode4);
+        assertEquals(4, KthToLast(listNode2, 1));
     }
 }
