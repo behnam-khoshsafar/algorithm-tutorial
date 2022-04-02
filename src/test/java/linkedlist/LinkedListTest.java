@@ -84,7 +84,7 @@ class LinkedListTest {
 
         assertTrue(deleteNode(listNode4));
         assertEquals(listNode4.getNext(), listNode8);
-        assertEquals(listNode7.getData(),listNode4.getData());
+        assertEquals(listNode7.getData(), listNode4.getData());
     }
 
     @Test
@@ -97,7 +97,7 @@ class LinkedListTest {
 
         assertTrue(deleteNode(listNode2));
         assertEquals(listNode2.getNext(), listNode4.getNext());
-        assertEquals(listNode2.getData(),listNode4.getData());
+        assertEquals(listNode2.getData(), listNode4.getData());
     }
 
     @Test
@@ -110,4 +110,34 @@ class LinkedListTest {
 
         assertFalse(deleteNode(listNode9));
     }
+
+    @Test
+    public void partitionShouldHandleEmptyValue() {
+        LinkedListNode<Integer> listNode = null;
+        assertNull(partition(listNode, 2));
+    }
+
+    @Test
+    public void partitionShouldHandleListWithOneElement() {
+        LinkedListNode<Integer> listNode = new LinkedListNode<>(1, null);
+        LinkedListNode<Integer> partition = partition(listNode, 2);
+        assertNull(partition.getNext());
+        assertEquals(1, partition.getData());
+    }
+
+    @Test
+    public void shouldPartitionCorrectly() {
+        LinkedListNode<Integer> tail = new LinkedListNode<>(1, null);
+        LinkedListNode<Integer> listNode2 = new LinkedListNode<>(2, tail);
+        LinkedListNode<Integer> listNode3 = new LinkedListNode<>(10, listNode2);
+        LinkedListNode<Integer> listNode4 = new LinkedListNode<>(5, listNode3);
+        LinkedListNode<Integer> listNode5 = new LinkedListNode<>(8, listNode4);
+        LinkedListNode<Integer> listNode6 = new LinkedListNode<>(5, listNode5);
+        LinkedListNode<Integer> head = new LinkedListNode<>(3, listNode6);
+
+        LinkedListNode<Integer> partition = partition(head, 5);
+
+        assertEquals(3, partition.getData());
+    }
+
 }

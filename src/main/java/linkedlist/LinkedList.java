@@ -20,7 +20,7 @@ public class LinkedList {
         }
     }
 
-    public static <E> E KthToLast(LinkedListNode<E> linkedListNode, int k) {
+    public static <E extends Comparable<E>> E KthToLast(LinkedListNode<E> linkedListNode, int k) {
         if (linkedListNode == null)
             return null;
 
@@ -40,12 +40,34 @@ public class LinkedList {
         return p2.getData();
     }
 
-    public static <E> boolean deleteNode(LinkedListNode<E> node) {
+    public static <E extends Comparable<E>> boolean deleteNode(LinkedListNode<E> node) {
         if (node == null || node.getNext() == null)
             return false;
         LinkedListNode<E> next = node.getNext();
         node.setNext(next.getNext());
         node.setData(next.getData());
         return true;
+    }
+
+    public static <E extends Comparable<E>> LinkedListNode<E> partition(LinkedListNode<E> node, E value) {
+        if (node == null)
+            return null;
+        if (node.getNext() == null)
+            return node;
+        LinkedListNode<E> head = node;
+        LinkedListNode<E> tail = node;
+        while (node != null) {
+            LinkedListNode<E> next = node.getNext();
+            if (node.getData().compareTo(value) < 0) {
+                node.setNext(head);
+                head = node;
+            } else {
+                tail.setNext(node);
+                tail = node;
+            }
+            node = next;
+        }
+        tail.setNext(null);
+        return head;
     }
 }

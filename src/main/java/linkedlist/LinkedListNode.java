@@ -1,6 +1,6 @@
 package linkedlist;
 
-public class LinkedListNode<E> {
+public class LinkedListNode<E extends Comparable<E>> {
     private E data;
     private LinkedListNode<E> next;
 
