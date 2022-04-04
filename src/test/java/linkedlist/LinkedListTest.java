@@ -141,7 +141,7 @@ class LinkedListTest {
     }
 
     @Test
-    public void sumListShouldReturnCorrectResult(){
+    public void sumListShouldReturnCorrectResult() {
         LinkedListNode<Integer> firstNumberTail = new LinkedListNode<>(6, null);
         LinkedListNode<Integer> firstNumberMiddle = new LinkedListNode<>(1, firstNumberTail);
         LinkedListNode<Integer> firstNumberHead = new LinkedListNode<>(7, firstNumberMiddle);
@@ -152,14 +152,14 @@ class LinkedListTest {
 
         LinkedListNode<Integer> resultNode = sumList(firstNumberHead, secondNumberHead);
 
-        assertEquals(2,resultNode.getData());
-        assertEquals(1,resultNode.getNext().getData());
-        assertEquals(9,resultNode.getNext().getNext().getData());
+        assertEquals(2, resultNode.getData());
+        assertEquals(1, resultNode.getNext().getData());
+        assertEquals(9, resultNode.getNext().getNext().getData());
         assertNull(resultNode.getNext().getNext().getNext());
     }
 
     @Test
-    public void sumListShouldReturnCorrectResultWithOneElement(){
+    public void sumListShouldReturnCorrectResultWithOneElement() {
         LinkedListNode<Integer> firstNumberHead = new LinkedListNode<>(7, null);
 
         LinkedListNode<Integer> secondNumberTail = new LinkedListNode<>(2, null);
@@ -168,10 +168,37 @@ class LinkedListTest {
 
         LinkedListNode<Integer> resultNode = sumList(firstNumberHead, secondNumberHead);
 
-        assertEquals(2,resultNode.getData());
-        assertEquals(0,resultNode.getNext().getData());
-        assertEquals(3,resultNode.getNext().getNext().getData());
+        assertEquals(2, resultNode.getData());
+        assertEquals(0, resultNode.getNext().getData());
+        assertEquals(3, resultNode.getNext().getNext().getData());
         assertNull(resultNode.getNext().getNext().getNext());
     }
 
+    @Test
+    public void isPalindromeEmptyInput() {
+        LinkedListNode<Integer> head = null;
+
+        assertFalse(LinkedList.isPalindrome(head));
+    }
+
+    @Test
+    public void isPalindrome() {
+        LinkedListNode<Integer> listNode3 = new LinkedListNode<>(0, null);
+        LinkedListNode<Integer> listNode4 = new LinkedListNode<>(1, listNode3);
+        LinkedListNode<Integer> listNode5 = new LinkedListNode<>(2, listNode4);
+        LinkedListNode<Integer> listNode6 = new LinkedListNode<>(1, listNode5);
+        LinkedListNode<Integer> head = new LinkedListNode<>(0, listNode6);
+
+        assertTrue(LinkedList.isPalindrome(head));
+    }
+
+    @Test
+    public void isPalindrome2() {
+        LinkedListNode<Integer> listNode4 = new LinkedListNode<>(1, null);
+        LinkedListNode<Integer> listNode5 = new LinkedListNode<>(2, listNode4);
+        LinkedListNode<Integer> listNode6 = new LinkedListNode<>(1, listNode5);
+        LinkedListNode<Integer> head = new LinkedListNode<>(0, listNode6);
+
+        assertFalse(LinkedList.isPalindrome(head));
+    }
 }

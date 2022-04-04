@@ -109,4 +109,32 @@ public class LinkedList {
         }
         return number;
     }
+
+    public static <E extends Comparable<E>> boolean isPalindrome(LinkedListNode<E> node) {
+        if (node == null)
+            return false;
+        LinkedListNode<E> reversedItems = reverseList(node);
+        return isEqual(node, reversedItems);
+    }
+
+    private static <E extends Comparable<E>> LinkedListNode<E> reverseList(LinkedListNode<E> node) {
+        LinkedListNode<E> head = null;
+        while (node != null) {
+            LinkedListNode<E> n = new LinkedListNode<>(node.getData(), null);
+            n.setNext(head);
+            head = n;
+            node = node.getNext();
+        }
+        return head;
+    }
+
+    private static <E extends Comparable<E>> boolean isEqual(LinkedListNode<E> firstNode, LinkedListNode<E> secondNode) {
+        while (firstNode != null && secondNode != null) {
+            if (!firstNode.getData().equals(secondNode.getData()))
+                return false;
+            firstNode = firstNode.getNext();
+            secondNode = secondNode.getNext();
+        }
+        return firstNode == null && secondNode == null;
+    }
 }
