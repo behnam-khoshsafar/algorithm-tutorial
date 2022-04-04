@@ -201,4 +201,60 @@ class LinkedListTest {
 
         assertFalse(LinkedList.isPalindrome(head));
     }
+
+    @Test
+    public void intersect() {
+        LinkedListNode<Integer> firstNodeTail = new LinkedListNode<>(1, null);
+        LinkedListNode<Integer> firstNode2 = new LinkedListNode<>(2, firstNodeTail);
+        LinkedListNode<Integer> firstNode3 = new LinkedListNode<>(7, firstNode2);
+        LinkedListNode<Integer> firstNode4 = new LinkedListNode<>(9, firstNode3);
+        LinkedListNode<Integer> firstNode5 = new LinkedListNode<>(5, firstNode4);
+        LinkedListNode<Integer> firstNode6 = new LinkedListNode<>(1, firstNode5);
+        LinkedListNode<Integer> firstNodeHead = new LinkedListNode<>(3, firstNode6);
+
+        LinkedListNode<Integer> secondNode1 = new LinkedListNode<>(6, firstNode3);
+        LinkedListNode<Integer> secondNodeHead = new LinkedListNode<>(4, secondNode1);
+
+        assertSame(firstNode3, LinkedList.intersect(firstNodeHead, secondNodeHead));
+    }
+
+    @Test
+    public void intersect2() {
+        LinkedListNode<Integer> firstNodeTail = new LinkedListNode<>(1, null);
+        LinkedListNode<Integer> firstNode2 = new LinkedListNode<>(2, firstNodeTail);
+        LinkedListNode<Integer> firstNode3 = new LinkedListNode<>(7, firstNode2);
+        LinkedListNode<Integer> firstNode4 = new LinkedListNode<>(9, firstNode3);
+        LinkedListNode<Integer> firstNode5 = new LinkedListNode<>(5, firstNode4);
+        LinkedListNode<Integer> firstNode6 = new LinkedListNode<>(1, firstNode5);
+        LinkedListNode<Integer> firstNodeHead = new LinkedListNode<>(3, firstNode6);
+
+        LinkedListNode<Integer> secondNode3 = new LinkedListNode<>(1, null);
+        LinkedListNode<Integer> secondNode4 = new LinkedListNode<>(2, secondNode3);
+        LinkedListNode<Integer> secondNode5 = new LinkedListNode<>(7, secondNode4);
+        LinkedListNode<Integer> secondNode6 = new LinkedListNode<>(6, secondNode5);
+        LinkedListNode<Integer> secondNodeHead = new LinkedListNode<>(4, secondNode6);
+
+        assertNull(LinkedList.intersect(firstNodeHead, secondNodeHead));
+    }
+
+    @Test
+    public void intersect3() {
+        LinkedListNode<Integer> firstNodeTail = new LinkedListNode<>(1, null);
+        LinkedListNode<Integer> firstNode2 = new LinkedListNode<>(2, firstNodeTail);
+        LinkedListNode<Integer> firstNode3 = new LinkedListNode<>(7, firstNode2);
+        LinkedListNode<Integer> firstNode4 = new LinkedListNode<>(9, firstNode3);
+        LinkedListNode<Integer> firstNode5 = new LinkedListNode<>(5, firstNode4);
+        LinkedListNode<Integer> firstNode6 = new LinkedListNode<>(1, firstNode5);
+        LinkedListNode<Integer> firstNodeHead = new LinkedListNode<>(3, firstNode6);
+
+        LinkedListNode<Integer> secondNodeTail = new LinkedListNode<>(1, null);
+        LinkedListNode<Integer> secondNode2 = new LinkedListNode<>(2, secondNodeTail);
+        LinkedListNode<Integer> secondNode3 = new LinkedListNode<>(1, secondNode2);
+        LinkedListNode<Integer> secondNode4 = new LinkedListNode<>(2, secondNode3);
+        LinkedListNode<Integer> secondNode5 = new LinkedListNode<>(7, secondNode4);
+        LinkedListNode<Integer> secondNode6 = new LinkedListNode<>(6, secondNode5);
+        LinkedListNode<Integer> secondNodeHead = new LinkedListNode<>(4, secondNode6);
+
+        assertNull(LinkedList.intersect(firstNodeHead, secondNodeHead));
+    }
 }

@@ -137,4 +137,56 @@ public class LinkedList {
         }
         return firstNode == null && secondNode == null;
     }
+
+    public static <E extends Comparable<E>> LinkedListNode<E> intersect(LinkedListNode<E> firstNode, LinkedListNode<E> secondNode) {
+        LinkedListDetails<E> firstDetails = getTailAndSize(firstNode);
+        LinkedListDetails<E> secondDetails = getTailAndSize(secondNode);
+        if (firstDetails.getTail() != secondDetails.getTail())
+            return null;
+
+        LinkedListNode<E> shorter = firstDetails.getSize() < secondDetails.getSize() ? firstNode : secondNode;
+        LinkedListNode<E> longer = firstDetails.getSize() > secondDetails.getSize() ? firstNode : secondNode;
+
+        longer = getKthNode(longer, Math.abs(firstDetails.getSize() - secondDetails.getSize()));
+
+        while (shorter != longer) {
+            shorter = shorter.getNext();
+            longer = longer.getNext();
+        }
+        return longer;
+    }
+
+    private static <E extends Comparable<E>> LinkedListNode<E> getKthNode(LinkedListNode<E> node, int k) {
+        for (int i = 0; i < k; i++) {
+            node = node.getNext();
+        }
+        return node;
+    }
+
+    private static <E extends Comparable<E>> LinkedListDetails<E> getTailAndSize(LinkedListNode<E> node) {
+        int counter = 1;
+        while (node.getNext() != null) {
+            node = node.getNext();
+            counter++;
+        }
+        return new LinkedListDetails<>(counter, node);
+    }
+
+    private static class LinkedListDetails<E extends Comparable<E>> {
+        private int size;
+        private LinkedListNode<E> tail;
+
+        public LinkedListDetails(int size, LinkedListNode<E> tail) {
+            this.size = size;
+            this.tail = tail;
+        }
+
+        public int getSize() {
+            return size;
+        }
+
+        public LinkedListNode<E> getTail() {
+            return tail;
+        }
+    }
 }
