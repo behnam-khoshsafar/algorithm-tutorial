@@ -137,7 +137,41 @@ class LinkedListTest {
 
         LinkedListNode<Integer> partition = partition(head, 5);
 
-        assertEquals(3, partition.getData());
+        assertEquals(1, partition.getData());
+    }
+
+    @Test
+    public void sumListShouldReturnCorrectResult(){
+        LinkedListNode<Integer> firstNumberTail = new LinkedListNode<>(6, null);
+        LinkedListNode<Integer> firstNumberMiddle = new LinkedListNode<>(1, firstNumberTail);
+        LinkedListNode<Integer> firstNumberHead = new LinkedListNode<>(7, firstNumberMiddle);
+
+        LinkedListNode<Integer> secondNumberTail = new LinkedListNode<>(2, null);
+        LinkedListNode<Integer> secondNumberMiddle = new LinkedListNode<>(9, secondNumberTail);
+        LinkedListNode<Integer> secondNumberHead = new LinkedListNode<>(5, secondNumberMiddle);
+
+        LinkedListNode<Integer> resultNode = sumList(firstNumberHead, secondNumberHead);
+
+        assertEquals(2,resultNode.getData());
+        assertEquals(1,resultNode.getNext().getData());
+        assertEquals(9,resultNode.getNext().getNext().getData());
+        assertNull(resultNode.getNext().getNext().getNext());
+    }
+
+    @Test
+    public void sumListShouldReturnCorrectResultWithOneElement(){
+        LinkedListNode<Integer> firstNumberHead = new LinkedListNode<>(7, null);
+
+        LinkedListNode<Integer> secondNumberTail = new LinkedListNode<>(2, null);
+        LinkedListNode<Integer> secondNumberMiddle = new LinkedListNode<>(9, secondNumberTail);
+        LinkedListNode<Integer> secondNumberHead = new LinkedListNode<>(5, secondNumberMiddle);
+
+        LinkedListNode<Integer> resultNode = sumList(firstNumberHead, secondNumberHead);
+
+        assertEquals(2,resultNode.getData());
+        assertEquals(0,resultNode.getNext().getData());
+        assertEquals(3,resultNode.getNext().getNext().getData());
+        assertNull(resultNode.getNext().getNext().getNext());
     }
 
 }

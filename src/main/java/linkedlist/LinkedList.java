@@ -70,4 +70,43 @@ public class LinkedList {
         tail.setNext(null);
         return head;
     }
+
+    public static LinkedListNode<Integer> sumList(LinkedListNode<Integer> firstNumber, LinkedListNode<Integer> secondNumber) {
+        if (firstNumber == null || secondNumber == null)
+            return null;
+        Integer first = convertReversedListToNumber(firstNumber);
+        Integer second = convertReversedListToNumber(secondNumber);
+        Integer result = first + second;
+        return convertNumberToReversedList(result);
+    }
+
+    private static LinkedListNode<Integer> convertNumberToReversedList(Integer number) {
+        LinkedListNode<Integer> head = null;
+        LinkedListNode<Integer> tail = null;
+        while (number > 0) {
+            int remainder = number % 10;
+            number /= 10;
+            LinkedListNode<Integer> next = new LinkedListNode<>(remainder, null);
+            if (head == null) {
+                head = next;
+                tail = next;
+            } else {
+                tail.setNext(next);
+                tail = next;
+            }
+        }
+        return head;
+    }
+
+    private static Integer convertReversedListToNumber(LinkedListNode<Integer> numberNode) {
+        LinkedListNode<Integer> num = numberNode;
+        int counter = 0;
+        int number = 0;
+        while (num != null) {
+            number = num.getData() * (int) Math.pow(10, counter) + number;
+            counter++;
+            num = num.getNext();
+        }
+        return number;
+    }
 }
