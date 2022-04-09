@@ -1,5 +1,6 @@
 package linkedlist;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -256,5 +257,47 @@ class LinkedListTest {
         LinkedListNode<Integer> secondNodeHead = new LinkedListNode<>(4, secondNode6);
 
         assertNull(LinkedList.intersect(firstNodeHead, secondNodeHead));
+    }
+
+    @Test
+    public void containsLoop(){
+        LinkedListNode<Integer> firstNodeTail = new LinkedListNode<>(10, null);
+        LinkedListNode<Integer> firstNode2 = new LinkedListNode<>(2, firstNodeTail);
+        LinkedListNode<Integer> firstNode3 = new LinkedListNode<>(7, firstNode2);
+        LinkedListNode<Integer> firstNode4 = new LinkedListNode<>(9, firstNode3);
+        LinkedListNode<Integer> firstNode5 = new LinkedListNode<>(5, firstNode4);
+        LinkedListNode<Integer> firstNode6 = new LinkedListNode<>(1, firstNode5);
+        LinkedListNode<Integer> firstNodeHead = new LinkedListNode<>(3, firstNode6);
+        firstNodeTail.setNext(firstNode4);
+
+        Assertions.assertEquals(firstNode4, getStartOfLoop(firstNodeHead));
+    }
+
+    @Test
+    public void notContainsLoop(){
+        LinkedListNode<Integer> firstNodeTail = new LinkedListNode<>(10, null);
+        LinkedListNode<Integer> firstNode2 = new LinkedListNode<>(2, firstNodeTail);
+        LinkedListNode<Integer> firstNode3 = new LinkedListNode<>(7, firstNode2);
+        LinkedListNode<Integer> firstNode4 = new LinkedListNode<>(9, firstNode3);
+        LinkedListNode<Integer> firstNode5 = new LinkedListNode<>(5, firstNode4);
+        LinkedListNode<Integer> firstNode6 = new LinkedListNode<>(1, firstNode5);
+        LinkedListNode<Integer> firstNodeHead = new LinkedListNode<>(3, firstNode6);
+
+        Assertions.assertNull(getStartOfLoop(firstNodeHead));
+    }
+
+    @Test
+    public void loopInListWithOneElement(){
+        LinkedListNode<Integer> firstNodeHead = new LinkedListNode<>(3, null);
+
+        Assertions.assertNull(getStartOfLoop(firstNodeHead));
+    }
+
+    @Test
+    public void loopInListWithTwoElement(){
+        LinkedListNode<Integer> firstNodeTail = new LinkedListNode<>(10, null);
+        LinkedListNode<Integer> firstNodeHead = new LinkedListNode<>(3, firstNodeTail);
+
+        Assertions.assertNull(getStartOfLoop(firstNodeHead));
     }
 }

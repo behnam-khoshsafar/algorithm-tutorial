@@ -172,9 +172,34 @@ public class LinkedList {
         return new LinkedListDetails<>(counter, node);
     }
 
+    public static <E extends Comparable<E>> LinkedListNode<E> getStartOfLoop(LinkedListNode<E> node) {
+        if (node == null || node.getNext() == null)
+            return null;
+        LinkedListNode<E> slowRunner = node;
+        LinkedListNode<E> fastRunner = node;
+        while (fastRunner != null && fastRunner.getNext() != null) {
+            slowRunner = slowRunner.getNext();
+            fastRunner = fastRunner.getNext().getNext();
+            if (slowRunner == fastRunner) {
+                break;
+            }
+        }
+
+        if (fastRunner == null || fastRunner.getNext() == null)
+            return null;
+
+        slowRunner = node;
+        while (slowRunner != fastRunner) {
+            slowRunner = slowRunner.getNext();
+            fastRunner = fastRunner.getNext();
+        }
+
+        return slowRunner;
+    }
+
     private static class LinkedListDetails<E extends Comparable<E>> {
-        private int size;
-        private LinkedListNode<E> tail;
+        private final int size;
+        private final LinkedListNode<E> tail;
 
         public LinkedListDetails(int size, LinkedListNode<E> tail) {
             this.size = size;
