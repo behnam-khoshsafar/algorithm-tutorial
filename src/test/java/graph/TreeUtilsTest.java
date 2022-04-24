@@ -7,8 +7,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TreeUtilsTest {
 
@@ -104,6 +103,67 @@ class TreeUtilsTest {
         assertEquals(7, result.get(2).get(1).getValue());
         assertEquals(12, result.get(2).get(2).getValue());
         assertEquals(17, result.get(2).get(3).getValue());
+    }
+
+    @Test
+    public void isBalancedNullInput() {
+        assertFalse(TreeUtils.isBalanced(null));
+    }
+
+    @Test
+    public void isBalancedOneElement() {
+        TreeNode<Integer> root = new TreeNode<>(10);
+        assertTrue(TreeUtils.isBalanced(root));
+    }
+
+    @Test
+    public void isBalancedForInBalanceTree() {
+        TreeNode<Integer> root = new TreeNode<>(10);
+        TreeNode<Integer> rootRightNode = new TreeNode<>(12);
+        root.setRight(rootRightNode);
+        rootRightNode.setRight(new TreeNode<>(14));
+        assertFalse(TreeUtils.isBalanced(root));
+    }
+
+    @Test
+    public void isBalancedForInBalanceTree2() {
+        TreeNode<Integer> root = new TreeNode<>(10);
+
+        TreeNode<Integer> rootRightNode = new TreeNode<>(12);
+        root.setRight(rootRightNode);
+        rootRightNode.setLeft(new TreeNode<>(2));
+
+        TreeNode<Integer> rootLeftNode = new TreeNode<>(14);
+        root.setLeft(rootLeftNode);
+        TreeNode<Integer> newNode = new TreeNode<>(13);
+        newNode.setRight(new TreeNode<>(14));
+        rootLeftNode.setRight(newNode);
+
+        assertFalse(TreeUtils.isBalanced(root));
+    }
+
+    @Test
+    public void isBalancedForBalanceTree() {
+        TreeNode<Integer> root = new TreeNode<>(10);
+        TreeNode<Integer> rootRightNode = new TreeNode<>(12);
+        root.setRight(rootRightNode);
+        root.setLeft(new TreeNode<>(14));
+        assertTrue(TreeUtils.isBalanced(root));
+    }
+
+    @Test
+    public void isBalancedForBalanceTree2() {
+        TreeNode<Integer> root = new TreeNode<>(10);
+
+        TreeNode<Integer> rootRightNode = new TreeNode<>(12);
+        root.setRight(rootRightNode);
+        rootRightNode.setLeft(new TreeNode<>(2));
+
+        TreeNode<Integer> rootLeftNode = new TreeNode<>(14);
+        root.setLeft(rootLeftNode);
+        rootLeftNode.setRight(new TreeNode<>(13));
+
+        assertTrue(TreeUtils.isBalanced(root));
     }
 
 }

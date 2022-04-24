@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import static java.lang.Integer.MIN_VALUE;
+
 public class TreeUtils {
 
     public static <E> TreeNode<E> createMinimalBST(E[] items) {
@@ -50,4 +52,28 @@ public class TreeUtils {
         createLevelLinkedList(root.getRight(), result, level + 1);
     }
 
+
+    public static <E> boolean isBalanced(TreeNode<E> root) {
+        if (root == null)
+            return false;
+        return getHeights(root) != MIN_VALUE;
+    }
+
+    private static <E> int getHeights(TreeNode<E> root) {
+        if (root == null) return -1;
+
+        int leftHeights = getHeights(root.getLeft());
+        if (leftHeights == MIN_VALUE)
+            return MIN_VALUE;
+
+        int rightHeights = getHeights(root.getRight());
+        if (rightHeights == MIN_VALUE)
+            return MIN_VALUE;
+
+
+        if (Math.abs(leftHeights - rightHeights) > 1)
+            return MIN_VALUE;
+        else
+            return Math.max(leftHeights, rightHeights) + 1;
+    }
 }
