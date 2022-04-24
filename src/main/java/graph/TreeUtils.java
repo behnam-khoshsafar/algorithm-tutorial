@@ -2,6 +2,10 @@ package graph;
 
 import graph.model.TreeNode;
 
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 public class TreeUtils {
 
     public static <E> TreeNode<E> createMinimalBST(E[] items) {
@@ -23,5 +27,27 @@ public class TreeUtils {
         return node;
     }
 
+    public static <E> List<LinkedList<TreeNode<E>>> createLevelLinkedList(TreeNode<E> root) {
+        if (root == null)
+            return Collections.emptyList();
+        List<LinkedList<TreeNode<E>>> result = new LinkedList<>();
+        createLevelLinkedList(root, result, 0);
+        return result;
+    }
+
+    private static <E> void createLevelLinkedList(TreeNode<E> root, List<LinkedList<TreeNode<E>>> result, int level) {
+        if (root == null)
+            return;
+        LinkedList<TreeNode<E>> nodes;
+        if (result.size() == level) {
+            nodes = new LinkedList<>();
+            result.add(nodes);
+        } else {
+            nodes = result.get(level);
+        }
+        nodes.add(root);
+        createLevelLinkedList(root.getLeft(), result, level + 1);
+        createLevelLinkedList(root.getRight(), result, level + 1);
+    }
 
 }
