@@ -76,4 +76,16 @@ public class TreeUtils {
         else
             return Math.max(leftHeights, rightHeights) + 1;
     }
+
+    public static <E extends Comparable<E>> boolean isValidBST(TreeNode<E> root) {
+        return isValidBST(root, null, null);
+    }
+
+    private static <E extends Comparable<E>> boolean isValidBST(TreeNode<E> root, E min, E max) {
+        if (root == null)
+            return true;
+        if (min != null && root.getValue().compareTo(min) <= 0 || max != null && root.getValue().compareTo(max) >= 0)
+            return false;
+        return isValidBST(root.getLeft(), min, root.getValue()) && isValidBST(root.getRight(), root.getValue(), max);
+    }
 }

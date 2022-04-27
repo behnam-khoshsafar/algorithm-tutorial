@@ -1,12 +1,14 @@
 package graph;
 
 import graph.model.TreeNode;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import static graph.TreeUtils.isValidBST;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TreeUtilsTest {
@@ -164,6 +166,55 @@ class TreeUtilsTest {
         rootLeftNode.setRight(new TreeNode<>(13));
 
         assertTrue(TreeUtils.isBalanced(root));
+    }
+
+    @Test
+    public void isValidBSTEmptyInput() {
+        assertTrue(isValidBST(null));
+    }
+
+    @Test
+    public void isValidBSTOneElement() {
+        Assertions.assertTrue(isValidBST(new TreeNode<>(10)));
+    }
+
+    @Test
+    public void isValidBSTTwoElement() {
+        TreeNode<Integer> root = new TreeNode<>(10);
+        root.setRight(new TreeNode<>(15));
+        Assertions.assertTrue(isValidBST(root));
+    }
+
+    @Test
+    public void isValidBSTTwoElement2() {
+        TreeNode<Integer> root = new TreeNode<>(10);
+        root.setRight(new TreeNode<>(5));
+        assertFalse((isValidBST(root)));
+    }
+
+    @Test
+    public void isValidBSTTwoElement3() {
+        TreeNode<Integer> root = new TreeNode<>(10);
+        root.setLeft(new TreeNode<>(5));
+        Assertions.assertTrue((isValidBST(root)));
+    }
+
+    @Test
+    public void isValidBSTTwoElement4() {
+        TreeNode<Integer> root = new TreeNode<>(10);
+        root.setLeft(new TreeNode<>(20));
+        assertFalse((isValidBST(root)));
+    }
+
+    @Test
+    public void isValidBSTMoreThanTwoElement() {
+        TreeNode<Integer> root = new TreeNode<>(20);
+        TreeNode<Integer> leftNode = new TreeNode<>(10);
+        leftNode.setRight(new TreeNode<>(25));
+        leftNode.setLeft(new TreeNode<>(5));
+        root.setLeft(leftNode);
+
+        assertFalse((isValidBST(root)));
     }
 
 }
