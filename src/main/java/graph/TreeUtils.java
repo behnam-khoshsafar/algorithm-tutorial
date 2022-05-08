@@ -88,4 +88,34 @@ public class TreeUtils {
             return false;
         return isValidBST(root.getLeft(), min, root.getValue()) && isValidBST(root.getRight(), root.getValue(), max);
     }
+
+    public static <E> TreeNode<E> findFirstCommonAncestor(TreeNode<E> q, TreeNode<E> p) {
+        int delta = depth(q) - depth(p);
+        TreeNode<E> shallowerNode = delta > 0 ? p : q;
+        TreeNode<E> deeperNode = delta > 0 ? q : p;
+        deeperNode = goUpBy(deeperNode, delta);
+
+        while (shallowerNode != null && deeperNode != null && !shallowerNode.equals(deeperNode)) {
+            shallowerNode = shallowerNode.getParent();
+            deeperNode = deeperNode.getParent();
+        }
+        return shallowerNode != null && deeperNode != null ? shallowerNode : null;
+    }
+
+    private static <E> TreeNode<E> goUpBy(TreeNode<E> node, int delta) {
+        while (delta > 0 && node != null) {
+            node = node.getParent();
+            delta--;
+        }
+        return node;
+    }
+
+    private static <E> int depth(TreeNode<E> node) {
+        int depth = 0;
+        while (node != null) {
+            depth++;
+            node = node.getParent();
+        }
+        return depth;
+    }
 }
