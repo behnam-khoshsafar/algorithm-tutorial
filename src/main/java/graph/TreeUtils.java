@@ -171,4 +171,32 @@ public class TreeUtils {
         prefix.removeLast();
         second.addFirst(headSecond);
     }
+
+    public static <E> boolean containsTree(TreeNode<E> firstTree, TreeNode<E> secondTree) {
+        if (secondTree == null)
+            return true;
+        return isSubtree(firstTree, secondTree);
+    }
+
+    private static <E> boolean isSubtree(TreeNode<E> firstTree, TreeNode<E> secondTree) {
+        if (firstTree == null)
+            return false;
+        else if (firstTree.getValue().equals(secondTree.getValue()) && matchTree(firstTree, secondTree))
+            return true;
+        else
+            return isSubtree(firstTree.getLeft(), secondTree) || isSubtree(firstTree.getRight(), secondTree);
+    }
+
+    private static <E> boolean matchTree(TreeNode<E> firstTree, TreeNode<E> secondTree) {
+        if (firstTree == null && secondTree == null)
+            return true;
+        else if (firstTree == null || secondTree == null)
+            return false;
+        else if (!firstTree.getValue().equals(secondTree.getValue()))
+            return false;
+        else
+            return matchTree(firstTree.getRight(), secondTree.getRight()) && matchTree(firstTree.getLeft(), secondTree.getLeft());
+    }
+
+
 }

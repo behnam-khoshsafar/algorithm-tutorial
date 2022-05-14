@@ -217,4 +217,17 @@ class TreeUtilsTest {
         assertFalse((isValidBST(root)));
     }
 
+    @Test
+    public void containsTreeSecondTreeIsEmpty() {
+        TreeNode<Integer> firstRoot = new TreeNode<>(10);
+        assertTrue(TreeUtils.containsTree(firstRoot, null));
+    }
+
+    @Test
+    public void containsTreeFirstTreeIsEmpty() {
+        TreeNode<Integer> firstRoot = new TreeNode<>(10);
+        assertFalse(TreeUtils.containsTree(null, firstRoot));
+    }
+
+
 }
