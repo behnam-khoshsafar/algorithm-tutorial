@@ -2,6 +2,7 @@ package graph;
 
 import graph.model.TreeNode;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -117,5 +118,57 @@ public class TreeUtils {
             node = node.getParent();
         }
         return depth;
+    }
+
+    public static <E> ArrayList<LinkedList<E>> allSequence(TreeNode<E> node) {
+        ArrayList<LinkedList<E>> result = new ArrayList<>();
+        if (node == null) {
+            result.add(new LinkedList<>());
+            return result;
+        }
+        LinkedList<E> prefix = new LinkedList<>();
+        prefix.add(node.getValue());
+
+        /* Recurse on left and right subtrees. */
+        ArrayList<LinkedList<E>> leftSeq = allSequence(node.getLeft());
+        ArrayList<LinkedList<E>> rightSeq = allSequence(node.getRight());
+
+        /* Weave together each list from the left and right sides. */
+        for (LinkedList<E> left : leftSeq) {
+            for (LinkedList<E> right : rightSeq) {
+                ArrayList<LinkedList<E>> weaved = new ArrayList<>();
+                weaveLists(left, right, weaved, prefix);
+                result.addAll(weaved);
+            }
+        }
+        return result;
+    }
+
+    /* Weave lists together in all possible ways. This algorithm works by removing the 29 * head from one list, recursing, and then doing the same thing with the other
+     * list. */
+    private static <E> void weaveLists(LinkedList<E> first, LinkedList<E> second, ArrayList<LinkedList<E>> results, LinkedList<E> prefix) {
+        /*  One list is empty. Add remainder to [a cloned] prefix and store result. */
+        if (first.size() == 0 || second.size() == 0) {
+            LinkedList<E> result = (LinkedList<E>) prefix.clone();
+            result.addAll(first);
+            result.addAll(second);
+            results.add(result);
+            return;
+        }
+
+        /* Recurse with head of first added to the prefix. Removing the head will damage
+         * first, so we'll need to put it back where we found it afterwards. */
+        E headFirst = first.removeFirst();
+        prefix.addLast(headFirst);
+        weaveLists(first, second, results, prefix);
+        prefix.removeLast();
+        first.addFirst(headFirst);
+
+        /* Do the same thing with second, damaging and then restoring the list.*/
+        E headSecond = second.removeFirst();
+        prefix.addLast(headSecond);
+        weaveLists(first, second, results, prefix);
+        prefix.removeLast();
+        second.addFirst(headSecond);
     }
 }
