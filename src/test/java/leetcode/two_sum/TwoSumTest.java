@@ -1,6 +1,5 @@
 package leetcode.two_sum;
 
-import leetcode.two_sum.TwoSum;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
