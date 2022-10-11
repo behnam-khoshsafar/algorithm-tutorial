@@ -22,7 +22,7 @@ public class ContainerWithMostWater {
             result = Math.max(result, area);
             if (items[left] > items[right])
                 right--;
-            else
+            else //this one solves the issue when two items are equal
                 left++;
         }
         return result;
